@@ -1,0 +1,30 @@
+Oculink-AI/
+├── .gitignore              # Tells Git which files to ignore (like temp files)
+├── LICENSE                 # Legal permission for others to use/fix code
+├── README.md               # The "Face" of project (Instruction manual)
+├── requirements.txt        # List of Python libraries to install
+├── main.py                 # The entry point (Start here)
+│
+├── core/                   # THE EYES: Raw CV detection
+│   ├── __init__.py
+│   ├── face_mesh_engine.py # Face & Iris tracking -> Tracks 468 points on face + irises
+│   └── webcam.py           # Connecting to webcam or another connected cam
+│   └── hand_engine.py      # Hand skeleton tracking -> Tracks 21 points on hand
+│
+├── detectors/               # THE HANDLER: Translating dots to actions
+│   ├── __init__.py
+│   ├── eye_detector.py     # Blink/Wink detection logic -> Detects winks using Eye Aspect Ratio (EAR)
+│   ├── head_detector.py    # Head detection logic -> Detect Head turn, nod 
+│   ├── hand_detector.py    # Recognizes signs (Fist, Palm, Finger counting)
+│   └── controller.py       # The Bridge: Commands Windows to move mouse/keys
+│
+├── utils/                  # THE TOOLBOX: Support math
+│   ├── __init__.py
+│   ├── fps_counter.py      # Count FPS at current time 
+│   └── config.py           # Thresholds and Sensitivity variables to fine tune movement capture
+│
+└── ui/                     # THE CLOTHES: User Interface
+    ├── __init__.py
+    └── 
+	
+	
