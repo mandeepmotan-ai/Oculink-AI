@@ -13,7 +13,7 @@ class FaceMeshEngine:
                  min_tracking_conf=0.7):
         self.mp_face_mesh = mp.solutions.face_mesh
         self.face_mesh = self.mp_face_mesh.FaceMesh(
-            static_image_model=False,
+            static_image_mode=False,
             max_num_faces=max_faces,
             refine_landmarks=refine_landmarks,
             min_detection_confidence=min_detection_conf,
