@@ -68,6 +68,7 @@ def main():
 
             # ──────────────────────────────────────────────────────────────── Head pose & movements ────────────────────────────────────────────────────────────>end
 
+
             # ─────────────────────────────────────────────────────  Eye Wink and EyeBrow Detection  ────────────────────────────────────────────────────────────>start
             # ── Eye detection ──
             eye_states = eye_detector.process(landmarks)
@@ -105,6 +106,30 @@ def main():
                 pass
 
             # ─────────────────────────────Action based on the Eye wink and EyeBrow raise ─────────────────────────────────────>start
+            # ─────────────────────────────────────────────────────  Eye Wink and EyeBrow Detection  ────────────────────────────────────────────────────────────>end
+            
+            
+            # ─────────────────────────────────────────────────────  Mouth Detection and Action Logic  ────────────────────────────────────────────────────────────>start
+            mouth_states = mouth_detector.process(landmarks)
+
+            #for debugging and fine tuning smiling 
+            cv2.putText(frame, f"Mouth Ratio: {mouth_states['mouth_ratio']:.2f}", (10, 280), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (50, 255, 255), 2)
+
+            cv2.putText(frame, f"Corner Raised: {mouth_states['corners_raised']:.4f}", (10, 310), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (50, 255, 255), 2)
+
+            # One-shot Action to be performed on smiling
+            if mouth_states['smile_triggered']:
+                cv2.putText(frame, f"SMILE DETECTED", (10, 350), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 165, 0), 2)
+                print('Smile Detected')
+                # kb.copy()
+
+            # The VISUAL (Stays on screen while you are smiling)
+            if mouth_states['is_smiling']:
+                cv2.putText(frame, "SMILING", (10, 360), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+    
+            
+            # ─────────────────────────────────────────────────────  Mouth Detection and Action Logic  ────────────────────────────────────────────────────────────>end
+            
 
         # ── Display FPS on cam window ──
         cv2.putText(frame, fps_counter.get_text(),(10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
